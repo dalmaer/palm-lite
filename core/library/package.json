@@ -1,0 +1,14 @@
+{
+  "name": "genai-lib",
+  "version": "1.0.0",
+  "description": "Zero-dependency Generative AI Library for Google PaLM APIs",
+  "type": "module",
+  "main": "src/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

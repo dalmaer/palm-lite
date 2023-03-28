@@ -3,11 +3,18 @@
   "name": "easy-genai",
   "version": "0.0.1",
   "description": "Simplest possible PaLM REST API wrapper.",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Dimitri Glazkov",
-  "license": "MIT"
+  "license": "MIT",
+  "workspaces": [
+    "./core/*"
+  ],
+  "devDependencies": {
+    "eslint": "^8.37.0"
+  }
 }
