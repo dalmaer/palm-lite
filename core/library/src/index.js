@@ -1,1 +1,1 @@
-export { Chat, ChatRequest } from "./chat.js";
+export { ChatRequest } from "./chat.js";
