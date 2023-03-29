@@ -2,7 +2,7 @@ export const CHAT_MODELS = ["chat-bison-001"];
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta1/models";
 
-export class ChatRequest {
+export class Chat {
   temperature;
   candidate_count;
   prompt = { messages: [] };
@@ -34,13 +34,13 @@ export class ChatRequest {
   }
 
   async generate({ model, key }) {
-    const response = await new Chat({ model, key }).generate(this);
+    const response = await new ChatInvocation({ model, key }).generate(this);
     this.addMessage(response.candidates[0].content);
     return response;
   }
 }
 
-class Chat {
+class ChatInvocation {
   model;
   key;
 

@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 
 import * as dotenv from "dotenv";
-import { ChatRequest } from "genai-lib";
+import { Chat } from "genai-lib";
 import { intro, text, outro, spinner, confirm } from "@clack/prompts";
 
 dotenv.config();
 const GCP_API_KEY = process.env.GCP_API_KEY;
+const QUIT_VALUE = "<quit>";
 
 const chatCycle = async (chat) => {
   const question = await text({
     message: "Type a message or hit <Enter> to exit",
+    defaultValue: QUIT_VALUE,
   });
 
-  if (!question) {
+  if (question === QUIT_VALUE) {
     const shouldQuit = await confirm({
       message: "Are you sure you want to quit?",
     });
@@ -36,7 +38,7 @@ const chatCycle = async (chat) => {
 
 intro("Hi there! I am a chatbot based on the PaLM API.");
 
-const chat = new ChatRequest();
+const chat = new Chat();
 
 while (!(await chatCycle(chat)));
 
