@@ -33,8 +33,10 @@ export class ChatRequest {
     return this;
   }
 
-  generate({ model, key }) {
-    return new Chat({ model, key }).generate(this);
+  async generate({ model, key }) {
+    const response = await new Chat({ model, key }).generate(this);
+    this.addMessage(response.candidates[0].content);
+    return response;
   }
 }
 
