@@ -31,7 +31,7 @@ const chatCycle = async (chat) => {
     model: "chat-bison-001",
   });
 
-  const reply = response.candidates[0].content;
+  const reply = response.reply;
 
   s.stop(reply);
 };

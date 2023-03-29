@@ -36,7 +36,7 @@ export class Chat {
   async generate({ model, key }) {
     const response = await new ChatInvocation({ model, key }).generate(this);
     this.addMessage(response.candidates[0].content);
-    return response;
+    return { reply: response.candidates[0].content, raw: response };
   }
 }
 
