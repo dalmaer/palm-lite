@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as dotenv from "dotenv";
-import { Chat, ChatRequest } from "genai-lib";
+import { ChatRequest } from "genai-lib";
 
 dotenv.config();
 
@@ -46,11 +46,9 @@ request
 
 const GCP_API_KEY = process.env.GCP_API_KEY;
 
-const chat = new Chat({
+const response = await request.generate({
   key: GCP_API_KEY,
   model: "chat-bison-001",
 });
-
-const response = await chat.generate(request);
 
 console.log(response);

@@ -32,9 +32,13 @@ export class ChatRequest {
     this.prompt.messages.push({ content: message });
     return this;
   }
+
+  generate({ model, key }) {
+    return new Chat({ model, key }).generate(this);
+  }
 }
 
-export class Chat {
+class Chat {
   model;
   key;
 
