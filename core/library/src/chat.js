@@ -1,6 +1,6 @@
 export const CHAT_MODELS = ["chat-bison-001"];
 
-const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta1/models";
+const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
 export class Chat {
   temperature;
