@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
 import * as dotenv from "dotenv";
-import { Chat } from "genai-lib";
+import { palm, Chat } from "genai-lib";
 import { intro, text, outro, spinner, confirm } from "@clack/prompts";
 
 dotenv.config();
-const GCP_API_KEY = process.env.GCP_API_KEY;
+const GCP_API_KEY = process.env.GCP_API_KEY || "";
 const QUIT_VALUE = "<quit>";
 
-const chatCycle = async (chat) => {
-  const question = await text({
+const chatCycle = async (chat: Chat) => {
+  const question = (await text({
     message: "Type a message or hit <Enter> to exit",
     defaultValue: QUIT_VALUE,
-  });
+  })) as string;
 
   if (question === QUIT_VALUE) {
     const shouldQuit = await confirm({
@@ -26,12 +26,12 @@ const chatCycle = async (chat) => {
   s.start("Generating message...");
 
   chat.addMessage(question);
-  const response = await chat.generate({
-    key: GCP_API_KEY,
-    model: "chat-bison-001",
-  });
+  const data = await fetch(palm(GCP_API_KEY).message(chat));
+  const response = await data.json();
 
-  const reply = response.reply;
+  const reply = response.candidates[0].content;
+
+  chat.addMessage(reply);
 
   s.stop(reply);
 };

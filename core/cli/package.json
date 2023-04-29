@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
   "bin": {
-    "genai-cli": "src/index.js"
+    "genai-cli": "dist/src/index.js"
   },
   "scripts": {
     "build": "tsc --b",
