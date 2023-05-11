@@ -1,6 +1,6 @@
 {
   "name": "palm-lite",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Zero-dependency wrapper for Google PaLM APIs",
   "keywords": [],
   "author": "Dimitri Glazkov",
