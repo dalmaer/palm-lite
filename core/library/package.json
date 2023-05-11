@@ -1,13 +1,24 @@
 {
   "name": "palm-lite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Zero-dependency wrapper for Google PaLM APIs",
-  "type": "module",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
   "keywords": [],
   "author": "Dimitri Glazkov",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dglazkov/palm-lite/issues"
+  },
+  "homepage": "https://github.com/dglazkov/palm-lite/tree/main/core/library#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dglazkov/palm-lite.git"
+  },
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/node": "^18.16.2",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
