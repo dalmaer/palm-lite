@@ -1,8 +1,6 @@
 {
   "private": true,
-  "name": "easy-genai",
   "version": "0.0.1",
-  "description": "Simplest possible PaLM REST API wrapper and a CLI for it.",
   "type": "module",
   "scripts": {
     "build": "tsc --b",

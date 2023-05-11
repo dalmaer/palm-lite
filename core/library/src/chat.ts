@@ -83,31 +83,3 @@ export class Chat {
     return this;
   }
 }
-
-// class ChatInvocation {
-//   model;
-//   key;
-
-//   constructor({ model, key }) {
-//     if (!CHAT_MODELS.includes(model)) {
-//       throw new Error("Unknown model.");
-//     }
-//     this.model = model;
-//     this.key = key;
-//   }
-
-//   async generate(request) {
-//     const response = await fetch(
-//       `${ENDPOINT_URL}/${this.model}:generateMessage?key=${this.key}`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(request),
-//       }
-//     );
-
-//     return response.json();
-//   }
-// }
