@@ -1,67 +1,50 @@
+import generativelanguage from "./types.js";
+
 export const CHAT_MODELS = ["chat-bison-001"];
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
-export type GenerateMessageParameters = unknown;
+export interface GenerateMessageRequest
+  extends generativelanguage.IGenerateMessageRequest {}
+
 export type PalmApiKey = string;
 
 export const palm = (apiKey: PalmApiKey) => {
   return {
-    message: (params: GenerateMessageParameters) => {
+    message: (request: GenerateMessageRequest) => {
       const model = CHAT_MODELS[0];
       const url = `${ENDPOINT_URL}/${model}:generateMessage?key=${apiKey}`;
-      return new GenerateMessageRequest(
-        url,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      return new Request(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        params
-      );
+        body: JSON.stringify(request),
+      });
     },
   };
 };
 
-export class GenerateMessageRequest extends Request {
-  private params: GenerateMessageParameters;
+export interface Example extends generativelanguage.IExample {}
 
-  constructor(
-    url: string,
-    init: RequestInit,
-    params: GenerateMessageParameters
-  ) {
-    init.body = JSON.stringify(params);
-    super(url, init);
-    this.params = params;
-  }
-}
-
-export type Example = {
-  input: { content: string };
-  output: { content: string };
-};
-
-export type MessagePrompt = {
-  examples?: Example[];
-  context?: string;
-  messages?: { content: string }[];
-};
+export interface MessagePrompt extends generativelanguage.IMessagePrompt {}
 
 /**
  * A convenience builder for MessageRequest
  */
-export class Chat {
+export class Chat implements GenerateMessageRequest {
   temperature: number;
-  candidate_count: number;
+  candidateCount: number;
   prompt: MessagePrompt = { messages: [] };
 
   constructor(
-    { temperature, candidate_count } = { temperature: 0.25, candidate_count: 1 }
+    { temperature, candidateCount } = {
+      temperature: 0.25,
+      candidateCount: 1,
+    }
   ) {
     this.temperature = temperature;
-    this.candidate_count = candidate_count;
+    this.candidateCount = candidateCount;
   }
 
   context(context: string) {

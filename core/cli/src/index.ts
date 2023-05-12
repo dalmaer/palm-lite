@@ -34,6 +34,11 @@ const chatCycle = async (chat: Chat): Promise<boolean> => {
     return true;
   }
 
+  if (!response.candidates?.length) {
+    s.stop("No response generated");
+    return false;
+  }
+
   const reply = response.candidates[0].content;
 
   chat.addMessage(reply);
