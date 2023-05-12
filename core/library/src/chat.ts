@@ -1,40 +1,89 @@
 import generativelanguage from "./types.js";
 
 export const CHAT_MODELS = ["chat-bison-001"];
+export const TEXT_MODELS = ["text-bison-001"];
+export const EMBEDDING_MODELS = ["embedding-gecko-001"];
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
 export interface GenerateMessageRequest
   extends generativelanguage.IGenerateMessageRequest {}
 
-export type PalmApiKey = string;
+export interface GenerateTextRequest
+  extends generativelanguage.IGenerateTextRequest {}
 
-export const palm = (apiKey: PalmApiKey) => {
-  return {
-    message: (request: GenerateMessageRequest) => {
-      const model = CHAT_MODELS[0];
-      const url = `${ENDPOINT_URL}/${model}:generateMessage?key=${apiKey}`;
-      return new Request(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(request),
-      });
-    },
-  };
-};
+export interface EmbedTextRequest
+  extends generativelanguage.IEmbedTextRequest {}
 
 export interface Example extends generativelanguage.IExample {}
 
 export interface MessagePrompt extends generativelanguage.IMessagePrompt {}
 
+export type PalmApiKey = string;
+
+type PaLMRequest =
+  | GenerateMessageRequest
+  | GenerateTextRequest
+  | EmbedTextRequest;
+
+class PaLM {
+  private key: PalmApiKey;
+  constructor(API_KEY: PalmApiKey) {
+    this.key = API_KEY;
+  }
+
+  private prepareRequest(method: string, request: PaLMRequest, model: string) {
+    const url = `${ENDPOINT_URL}/${model}:${method}?key=${this.key}`;
+    return new Request(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+  }
+
+  message(
+    request: GenerateMessageRequest,
+    model: string = CHAT_MODELS[0]
+  ): Request {
+    return this.prepareRequest("generateMessage", request, model);
+  }
+
+  text(request: GenerateTextRequest, model: string = TEXT_MODELS[0]): Request {
+    return this.prepareRequest("generateText", request, model);
+  }
+
+  embedding(
+    request: EmbedTextRequest,
+    model: string = EMBEDDING_MODELS[0]
+  ): Request {
+    return this.prepareRequest("embedText", request, model);
+  }
+}
+
+export const palm = (apiKey: PalmApiKey): PaLM => new PaLM(apiKey);
+
 /**
- * A convenience builder for MessageRequest
+ * A convenience builder for chat-like requests.
+ *
+ * Implements `GenerateMessageRequest` interface.
+ *
+ * Example:
+ *
+ * ```typescript
+ * const chat = new Chat();
+ * chat.addMessage("Hello there!");
+ * const data = await fetch(palm(API_KEY).message(chat));
+ * const response = await data.json();
+ * ```
+ *
  */
 export class Chat implements GenerateMessageRequest {
-  temperature: number;
-  candidateCount: number;
+  temperature?: number;
+  candidateCount?: number;
+  topP?: number | undefined;
+  topK?: number | undefined;
   prompt: MessagePrompt = { messages: [] };
 
   constructor(
