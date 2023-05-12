@@ -82,8 +82,8 @@ export const palm = (apiKey: PalmApiKey): PaLM => new PaLM(apiKey);
 export class Chat implements GenerateMessageRequest {
   temperature?: number;
   candidateCount?: number;
-  topP?: number | undefined;
-  topK?: number | undefined;
+  topP?: number;
+  topK?: number;
   prompt: MessagePrompt = { messages: [] };
 
   constructor(
