@@ -24,6 +24,7 @@ models.forEach((model) => {
     else bag.push(model);
   });
   delete model.supportedGenerationMethods;
+  model.name = model.name.replace("models/", "");
 });
 
 const preamble = `/**
