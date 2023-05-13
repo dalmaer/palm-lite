@@ -1,19 +1,12 @@
-import generativelanguage from "./types.js";
+import {
+  GenerateMessageRequest,
+  GenerateTextRequest,
+  EmbedTextRequest,
+  MessagePrompt,
+} from "./types.js";
 import { models } from "./models.js";
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
-
-export interface GenerateMessageRequest
-  extends generativelanguage.GenerateMessageRequest {}
-
-export interface GenerateTextRequest
-  extends generativelanguage.GenerateTextRequest {}
-
-export interface EmbedTextRequest extends generativelanguage.EmbedTextRequest {}
-
-export interface Example extends generativelanguage.Example {}
-
-export interface MessagePrompt extends generativelanguage.MessagePrompt {}
 
 export type PalmApiKey = string;
 
