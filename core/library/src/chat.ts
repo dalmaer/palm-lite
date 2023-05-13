@@ -4,17 +4,16 @@ import { models } from "./models.js";
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
 export interface GenerateMessageRequest
-  extends generativelanguage.IGenerateMessageRequest {}
+  extends generativelanguage.GenerateMessageRequest {}
 
 export interface GenerateTextRequest
-  extends generativelanguage.IGenerateTextRequest {}
+  extends generativelanguage.GenerateTextRequest {}
 
-export interface EmbedTextRequest
-  extends generativelanguage.IEmbedTextRequest {}
+export interface EmbedTextRequest extends generativelanguage.EmbedTextRequest {}
 
-export interface Example extends generativelanguage.IExample {}
+export interface Example extends generativelanguage.Example {}
 
-export interface MessagePrompt extends generativelanguage.IMessagePrompt {}
+export interface MessagePrompt extends generativelanguage.MessagePrompt {}
 
 export type PalmApiKey = string;
 

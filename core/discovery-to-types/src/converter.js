@@ -100,7 +100,7 @@ class Converter {
     return `[${types.join(", ")}]`;
   }
   toTypeName(ref) {
-    return `I${ref}`;
+    return ref;
   }
   toUnion(types) {
     return types.join("|");
