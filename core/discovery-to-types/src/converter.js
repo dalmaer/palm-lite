@@ -9,7 +9,7 @@ class Converter {
     const name = this.toTypeName(schema.id);
     const type = this.getType(schema);
 
-    return `${docs}type ${name} = ${type}`;
+    return `${docs}interface ${name} ${type}`;
   }
   extend(type, types) {
     if (!Array.isArray(types)) {
