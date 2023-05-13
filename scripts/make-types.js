@@ -3,7 +3,7 @@
  */
 
 import { config } from "dotenv";
-import { render } from "discovery-tsd";
+import { render } from "discovery-to-types";
 import { writeFile } from "fs/promises";
 
 config();

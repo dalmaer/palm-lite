@@ -1,0 +1,10 @@
+{
+  "name": "discovery-to-types",
+  "private": true,
+  "main": "src/index.js",
+  "dependencies": {
+    "lodash.isempty": "^4.4.0",
+    "lodash.template": "^4.4.0",
+    "prettier": "^2.8.8"
+  }
+}
