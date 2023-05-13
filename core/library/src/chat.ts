@@ -1,8 +1,5 @@
 import generativelanguage from "./types.js";
-
-export const CHAT_MODELS = ["chat-bison-001"];
-export const TEXT_MODELS = ["text-bison-001"];
-export const EMBEDDING_MODELS = ["embedding-gecko-001"];
+import { models } from "./models.js";
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
@@ -45,18 +42,21 @@ class PaLM {
 
   message(
     request: GenerateMessageRequest,
-    model: string = CHAT_MODELS[0]
+    model: string = models.generateMessage[0].name
   ): Request {
     return this.prepareRequest("generateMessage", request, model);
   }
 
-  text(request: GenerateTextRequest, model: string = TEXT_MODELS[0]): Request {
+  text(
+    request: GenerateTextRequest,
+    model: string = models.generateText[0].name
+  ): Request {
     return this.prepareRequest("generateText", request, model);
   }
 
   embedding(
     request: EmbedTextRequest,
-    model: string = EMBEDDING_MODELS[0]
+    model: string = models.embedText[0].name
   ): Request {
     return this.prepareRequest("embedText", request, model);
   }

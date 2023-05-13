@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc --b",
     "test": "ava",
-    "make-types": "node ./scripts/make-types.js"
+    "make-types": "node ./scripts/make-types.js",
+    "make-models": "node ./scripts/make-models.js"
   },
   "keywords": [],
   "author": "Dimitri Glazkov",
