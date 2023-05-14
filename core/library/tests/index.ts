@@ -10,7 +10,15 @@ test("palm() produces a PaLM instance", (t) => {
 });
 
 test("palm().message() produces a valid Request", async (t) => {
-  const request = palm("API_KEY").message({ prompt: { messages: [] } });
+  const request = palm("API_KEY").message({
+    prompt: {
+      messages: [
+        {
+          content: "Hello there!",
+        },
+      ],
+    },
+  });
   t.true(request instanceof Request);
   t.is(request.method, "POST");
   t.is(request.headers.get("Content-Type"), "application/json");
@@ -19,7 +27,15 @@ test("palm().message() produces a valid Request", async (t) => {
     "https://generativelanguage.googleapis.com/v1beta2/models/chat-bison-001:generateMessage?key=API_KEY"
   );
   const body = await request.json();
-  t.deepEqual(body, { prompt: { messages: [] } });
+  t.deepEqual(body, {
+    prompt: {
+      messages: [
+        {
+          content: "Hello there!",
+        },
+      ],
+    },
+  });
 });
 
 test("palm().text() produces a valid Request", async (t) => {
