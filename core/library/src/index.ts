@@ -78,7 +78,7 @@ class PaLM {
  *
  * // Make sure to set the API_KEY environment variable.
  * const API_KEY = process.env.API_KEY;
- * const request = palm("API_KEY").message({
+ * const request = palm(API_KEY).message({
  *   prompt: {
  *     messages: [ { content: "Hello there!" } ],
  *   },
