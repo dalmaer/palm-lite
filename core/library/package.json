@@ -1,6 +1,6 @@
 {
   "name": "palm-lite",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Zero-dependency wrapper for Google PaLM APIs",
   "keywords": [],
   "author": "Dimitri Glazkov",
@@ -17,7 +17,7 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "files": [
-    "dist"
+    "dist/src"
   ],
   "devDependencies": {
     "@types/node": "^18.16.2",
