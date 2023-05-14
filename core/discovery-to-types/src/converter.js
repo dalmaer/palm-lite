@@ -76,8 +76,10 @@ class Converter {
       .forEach((name) => {
         const prop = props[name];
         const docs = prop.description ? this.toJSDoc(prop.description) : "";
+        const inferredRequired =
+          prop.description && prop.description.startsWith("Required.");
         const prefix = prop.readonly ? "readonly " : "";
-        const suffix = prop.required ? "" : "?";
+        const suffix = prop.required || inferredRequired ? "" : "?";
         const key = `${prefix}${name}${suffix}`;
         const value = this.getType(prop);
         fields.push(`${docs}${key}: ${value}`);

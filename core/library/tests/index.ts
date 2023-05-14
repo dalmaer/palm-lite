@@ -23,7 +23,7 @@ test("palm().message() produces a valid Request", async (t) => {
 });
 
 test("palm().text() produces a valid Request", async (t) => {
-  const request = palm("API_KEY").text({});
+  const request = palm("API_KEY").text({ prompt: { text: "" } });
   t.true(request instanceof Request);
   t.is(request.method, "POST");
   t.is(request.headers.get("Content-Type"), "application/json");
@@ -32,7 +32,7 @@ test("palm().text() produces a valid Request", async (t) => {
     "https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=API_KEY"
   );
   const body = await request.json();
-  t.deepEqual(body, {});
+  t.deepEqual(body, { prompt: { text: "" } });
 });
 
 test("palm().embedding() produces a valid Request", async (t) => {

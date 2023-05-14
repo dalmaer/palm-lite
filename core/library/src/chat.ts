@@ -1,5 +1,10 @@
 import { GenerateMessageRequest, MessagePrompt } from "./types.js";
 
+export interface PartialGenerateMessageRequest
+  extends Omit<GenerateMessageRequest, "prompt"> {
+  prompt?: MessagePrompt;
+}
+
 /**
  * A convenience builder for chat-like requests.
  *
@@ -22,7 +27,7 @@ export class Chat implements GenerateMessageRequest {
   topK?: number;
   prompt: MessagePrompt = { messages: [] };
 
-  constructor(request?: GenerateMessageRequest) {
+  constructor(request?: PartialGenerateMessageRequest) {
     Object.assign(this, request);
   }
 
