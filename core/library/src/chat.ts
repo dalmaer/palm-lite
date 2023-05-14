@@ -22,14 +22,8 @@ export class Chat implements GenerateMessageRequest {
   topK?: number;
   prompt: MessagePrompt = { messages: [] };
 
-  constructor(
-    { temperature, candidateCount } = {
-      temperature: 0.25,
-      candidateCount: 1,
-    }
-  ) {
-    this.temperature = temperature;
-    this.candidateCount = candidateCount;
+  constructor(request?: GenerateMessageRequest) {
+    Object.assign(this, request);
   }
 
   context(context: string) {
