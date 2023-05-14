@@ -28,6 +28,9 @@ test("addMessage() works as advertised", (t) => {
   t.deepEqual(chat.prompt, {
     messages: [{ content: "Hello there!" }, { content: "General Kenobi!" }],
   });
+
+  const returns = chat.addMessage("You are a bold one.");
+  t.is(returns, chat);
 });
 
 test("addExample() works as advertised", (t) => {
@@ -60,6 +63,12 @@ test("addExample() works as advertised", (t) => {
     ],
     messages: [],
   });
+
+  const returns = chat.addExample({
+    input: "I have a bad feeling about this.",
+    output: "I have a very bad feeling about this.",
+  });
+  t.is(returns, chat);
 });
 
 test("context() works as advertised", (t) => {
@@ -75,4 +84,7 @@ test("context() works as advertised", (t) => {
     context: "Pull up! All craft pull up!",
     messages: [],
   });
+
+  const returns = chat.context("I have a bad feeling about this.");
+  t.is(returns, chat);
 });

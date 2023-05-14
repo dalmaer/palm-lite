@@ -7,7 +7,7 @@ import { models } from "./models.js";
 
 const ENDPOINT_URL = "https://generativelanguage.googleapis.com/v1beta2/models";
 
-export type PalmApiKey = string;
+type PalmApiKey = string;
 
 type PaLMRequest =
   | GenerateMessageRequest
@@ -54,3 +54,5 @@ class PaLM {
 
 export const palm = (apiKey: PalmApiKey): PaLM => new PaLM(apiKey);
 export * from "./chat.js";
+export * from "./types.js";
+export * from "./text.js";
