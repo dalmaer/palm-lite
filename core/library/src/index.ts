@@ -14,45 +14,49 @@ type PaLMRequest =
   | GenerateTextRequest
   | EmbedTextRequest;
 
+const prepareRequest = (
+  key: PalmApiKey,
+  method: string,
+  request: PaLMRequest,
+  model: string
+): Request => {
+  const url = `${ENDPOINT_URL}/${model}:${method}?key=${key}`;
+  return new Request(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(request),
+  });
+};
+
 class PaLM {
   private key: PalmApiKey;
   constructor(API_KEY: PalmApiKey) {
     this.key = API_KEY;
   }
 
-  private prepareRequest(method: string, request: PaLMRequest, model: string) {
-    const url = `${ENDPOINT_URL}/${model}:${method}?key=${this.key}`;
-    return new Request(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(request),
-    });
-  }
-
   message(
     request: GenerateMessageRequest,
     model: string = models.generateMessage[0].name
   ): Request {
-    return this.prepareRequest("generateMessage", request, model);
+    return prepareRequest(this.key, "generateMessage", request, model);
   }
 
   text(
     request: GenerateTextRequest,
     model: string = models.generateText[0].name
   ): Request {
-    return this.prepareRequest("generateText", request, model);
+    return prepareRequest(this.key, "generateText", request, model);
   }
 
   embedding(
     request: EmbedTextRequest,
     model: string = models.embedText[0].name
   ): Request {
-    return this.prepareRequest("embedText", request, model);
+    return prepareRequest(this.key, "embedText", request, model);
   }
 }
 
 export const palm = (apiKey: PalmApiKey): PaLM => new PaLM(apiKey);
-export { Chat } from "./chat.js";
-export type * from "./chat.js";
+export * from "./chat.js";
