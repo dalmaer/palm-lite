@@ -14,12 +14,15 @@ type PaLMRequest =
   | GenerateTextRequest
   | EmbedTextRequest;
 
+type ModelInfo = Record<string, Array<{ name: string }>>;
+
 const prepareRequest = (
   key: PalmApiKey,
   method: string,
   request: PaLMRequest,
-  model: string
+  model?: string
 ): Request => {
+  if (!model) model = (models as ModelInfo)[method][0].name;
   const url = `${ENDPOINT_URL}/${model}:${method}?key=${key}`;
   return new Request(url, {
     method: "POST",
@@ -36,24 +39,15 @@ class PaLM {
     this.key = API_KEY;
   }
 
-  message(
-    request: GenerateMessageRequest,
-    model: string = models.generateMessage[0].name
-  ): Request {
+  message(request: GenerateMessageRequest, model?: string): Request {
     return prepareRequest(this.key, "generateMessage", request, model);
   }
 
-  text(
-    request: GenerateTextRequest,
-    model: string = models.generateText[0].name
-  ): Request {
+  text(request: GenerateTextRequest, model?: string): Request {
     return prepareRequest(this.key, "generateText", request, model);
   }
 
-  embedding(
-    request: EmbedTextRequest,
-    model: string = models.embedText[0].name
-  ): Request {
+  embedding(request: EmbedTextRequest, model?: string): Request {
     return prepareRequest(this.key, "embedText", request, model);
   }
 }
